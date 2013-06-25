@@ -6464,14 +6464,14 @@ button.close {
 }
 .single-photo-descript-box{
     border: 1px solid #ADB6C9;
-    width:385px;
+    width:285px;
     position: relative;
     margin-top:5px;
     margin-bottom: 15px;
     margin-left:20px;
 }
 .single-photo-descript-box textarea{
-    width: 381px !important;
+    width: 281px !important;
     padding: 2px;
     height: 90px !important;
     border: none;
@@ -6479,13 +6479,16 @@ button.close {
     margin-bottom:1px;
 }
 
+#uploadModal form, #atFriendModal form{
+    margin-bottom:0px !important;
+}
 .photo-upload-container{
     height:400px;
     min-height:400px;
     overflow: scroll;
 }
 .photo-upload-footer{
-    width:620px !important;
+    width:650px !important;
 }
 .new-album-container{
     height: 300px;
