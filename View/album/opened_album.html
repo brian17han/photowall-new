@@ -17,7 +17,14 @@
 			$(":password").val("");
 		});
 	</script>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script><!--show hide buttons-->
+    $(document).ready(function(show_hide) {
+        $('.user_info').mouseenter(function() {$('.list_action',this).removeClass("hideV").addClass("showV")});
+        $('.user_info').mouseleave(function() {$('.list_action',this).removeClass("showV").addClass("hideV")});
+    });
+    </script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Photowall-我的展示墙</title>
 <link rel="stylesheet" type="text/css" href="../../View/resources/css/follow.css">
 </head>
@@ -91,7 +98,10 @@
     {#if $friends_array[$k].first_letter ne $letter_storage[$k]#} 
     <div class="list">
     	<div class="album-path"><h3>我的相册 <i class="icon-arrow-right"></i> 相册名称 </h3></div>
-    	{#if $k ne 0#}
+        <button type="button" class="btn"><i class="icon-upload"></i> <span class="text-error">上传照片</span></button>
+        <button type="button" class="btn"><i class="icon-plus"></i> <span class="text-error">新建相册</span></button>
+        <br/>
+        {#if $k ne 0#}
           <hr class="hr"/>
         {#/if#}
     	  <ul> 
@@ -107,7 +117,15 @@
                         {#/foreach#}
                     </div>
                     <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
-              </li>
+                    <div class="list_action hideV">
+                        <div class="list_action_button" onclick=" ">
+                            <p>访问</p>
+                        </div>
+                        <div class="list_action_button" onclick="delete_friend({#$friends_array[$k].user_id#});" >
+                            <p>删除</p>
+                        </div>
+                    </div>
+             </li>
        
     {#else#}
              <li class="user_info">
@@ -120,7 +138,15 @@
                         {#/foreach#}
                     </div>
                     <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
-              </li>
+                    <div class="list_action hideV">
+                        <div class="list_action_button" onclick=" ">
+                            <p>访问</p>
+                        </div>
+                        <div class="list_action_button" onclick="delete_friend({#$friends_array[$k].user_id#});" >
+                            <p>删除</p>
+                        </div>
+                    </div>
+             </li>
     {#/if#}
     {#if $friends_array[$k+1].first_letter ne $letter_storage[$k+1]#} 
         </ul>

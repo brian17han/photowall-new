@@ -4,11 +4,12 @@
     <list default="true" id="34085b4f-f21f-45e8-85f3-260b58d5975a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View/home/home.html" afterPath="$PROJECT_DIR$/View/home/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View/home/home2.html" afterPath="$PROJECT_DIR$/View/home/home2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View/album/opened_album.html" afterPath="$PROJECT_DIR$/View/album/opened_album.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="photowall-new.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372208707129" ignored="false" />
+    <file path="/Dummy.txt" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372208734934" ignored="false" />
     <file path="/bootstrap.css" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372124743066" ignored="false" />
     <file path="/home.html" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372124330076" ignored="false" />
     <file path="D:/Dropbox/photowall/Local_Photowall/View/home/home2.html" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372132499500" ignored="false" />
@@ -17,6 +18,8 @@
     <file path="/connector.ini.php" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372123856883" ignored="false" />
     <file path="D:/xampp/htdocs/Local_Photowall/connector.ini.php" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372123856883" ignored="false" />
     <file path="D:/Dropbox/photowall/Local_Photowall/View/resources/css/recommended-styles.css" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372132499500" ignored="false" />
+    <file path="/show_album.html" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372209101222" ignored="false" />
+    <file path="/opened_album.html" changelist="34085b4f-f21f-45e8-85f3-260b58d5975a" time="1372209291844" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +38,38 @@
     <favorites_list name="photowall-new" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="opened_album.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/View/album/opened_album.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="0" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.55212355">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fans.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/View/relation/fans.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="117" column="34" selection-start="5562" selection-end="5760" vertical-scroll-proportion="-10.178572">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="friend.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/View/relation/friend.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="8" selection-start="943" selection-end="1269" vertical-scroll-proportion="-2.5357144">
+              <folding>
+                <element signature="tag#script#7;tag#head#0;tag#html#0" expanded="false" />
+                <element signature="tag#div#1;tag#li#0;tag#ul#0;tag#div#0;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -55,6 +89,8 @@
       <list>
         <option value="$PROJECT_DIR$/View/home/home.html" />
         <option value="$PROJECT_DIR$/View/resources/css/bootstrap.css" />
+        <option value="$PROJECT_DIR$/View/album/show_album.html" />
+        <option value="$PROJECT_DIR$/View/album/opened_album.html" />
       </list>
     </option>
   </component>
@@ -183,6 +219,24 @@
               <option name="myItemId" value="View" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="relation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="photowall-new" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="photowall-new" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="View" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -293,15 +347,19 @@
       <created>1372208712282</created>
       <updated>1372208712282</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fixed 添加评论 textarea size&#10;fixed loader image">
+      <created>1372208740244</created>
+      <updated>1372208740244</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="40" width="960" height="1040" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33598185" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33598185" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -424,13 +482,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/album/show_album.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/View/album/album_form.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -468,16 +519,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/album/opened_album.html">
+    <entry file="file://$PROJECT_DIR$/View/resources/css/bootstrap.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="151" column="14" selection-start="5450" selection-end="7262" vertical-scroll-proportion="0.37346438">
+        <state line="6463" column="22" selection-start="157976" selection-end="157976" vertical-scroll-proportion="0.26560587">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/View/resources/css/bootstrap.css">
+    <entry file="file://$PROJECT_DIR$/View/album/show_album.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6463" column="22" selection-start="157976" selection-end="157976" vertical-scroll-proportion="0.26560587">
+        <state line="93" column="0" selection-start="4527" selection-end="4527" vertical-scroll-proportion="0.5868726">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/relation/fans.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="34" selection-start="5562" selection-end="5760" vertical-scroll-proportion="-10.178572">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/relation/friend.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="8" selection-start="943" selection-end="1269" vertical-scroll-proportion="-2.5357144">
+          <folding>
+            <element signature="tag#script#7;tag#head#0;tag#html#0" expanded="false" />
+            <element signature="tag#div#1;tag#li#0;tag#ul#0;tag#div#0;tag#div#1;tag#div#0;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/View/album/opened_album.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.55212355">
           <folding />
         </state>
       </provider>
