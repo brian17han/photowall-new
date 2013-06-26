@@ -6461,6 +6461,7 @@ button.close {
 .upload-img{
     display:inline-block;
     width:151px;
+    margin-right: 2px;
 }
 .single-photo-descript-box{
     border: 1px solid #ADB6C9;

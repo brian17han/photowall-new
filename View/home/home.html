@@ -168,7 +168,7 @@
             $(":password").val("");
 
             $('#selectImgAtFriend').live('change', function(){
-                $("#modal_body1").append("<img class='loader' src='../../Controller/resources/img/loader.gif' alt='Uploading....'/>");
+                $("#modal_body1").append("<div class='upload-img loader'><img src='../../Controller/resources/img/loader.gif' alt='Uploading....'/></div>");
                 $("#selectImgAtFriend_form").ajaxForm({
                    // data:{photo_index:index},
                     target: '#modal_body1',
@@ -176,7 +176,7 @@
                 }).submit();
             });
             $('#selectImgToAlbum').live('change', function(){
-              $("#modal_body").append("<img class='loader' src='../../Controller/resources/img/loader.gif' alt='Uploading....'/>");
+              $("#modal_body").append("<div class='upload-img loader'><img src='../../Controller/resources/img/loader.gif' alt='Uploading....'/></div>");
                 $("#upload_photo_form").ajaxForm({
                     data:{photo_index:index},
                   //  target: '#modal_body',
