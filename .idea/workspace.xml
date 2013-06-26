@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34085b4f-f21f-45e8-85f3-260b58d5975a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View/resources/css/bootstrap.css" afterPath="$PROJECT_DIR$/View/resources/css/bootstrap.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View/home/home.html" afterPath="$PROJECT_DIR$/View/home/home.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/View/home/home2.html" afterPath="$PROJECT_DIR$/View/home/home2.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -85,7 +84,7 @@
       <file leaf-file-name="home.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/View/home/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="35" selection-start="5256" selection-end="5274" vertical-scroll-proportion="0.11494253">
+            <state line="123" column="35" selection-start="5256" selection-end="5274" vertical-scroll-proportion="0.12711865">
               <folding />
             </state>
           </provider>
@@ -124,10 +123,9 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="32" />
-    <option name="width" value="1932" />
-    <option name="height" value="1056" />
+    <option name="y" value="40" />
+    <option name="width" value="960" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -351,19 +349,23 @@
       <created>1372123104175</created>
       <updated>1372123104175</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fixed 添加评论 textarea size&#10;fixed loader image">
+      <created>1372208651206</created>
+      <updated>1372208651206</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1932" height="1056" extended-state="0" />
+    <frame x="0" y="40" width="960" height="1040" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32998884" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33598185" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.120972" sideWeight="0.67001116" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24864277" sideWeight="0.66401815" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -535,7 +537,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/View/home/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="35" selection-start="5256" selection-end="5274" vertical-scroll-proportion="0.11494253">
+        <state line="123" column="35" selection-start="5256" selection-end="5274" vertical-scroll-proportion="0.12711865">
           <folding />
         </state>
       </provider>
