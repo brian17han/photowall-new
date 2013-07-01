@@ -10,6 +10,7 @@
     <script type="text/javascript" src="../../View/resources/js/validation.js"></script>
     <script type="text/javascript" src="../../View/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../View/resources/js/friends_news/home.js"></script>
+     <script type="text/javascript" src="../../View/resources/js/directly_at_friends/at_friends.js"></script>
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/walls.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap-responsive.css">
@@ -140,24 +141,7 @@
             });
             $('.upload-remove-img').click(function() {$(this).parents('.upload-img').fadeOut("slow",function(){$(this).remove()}); }); /*remove upload img*/
         }
-        function showResponse_atFriends(responseText, statusText)
-        {
-           // alert(responseText+","+statusText);
-            html.push(responseText);
-            //html+=responseText;
-            var html_str="";
-            for(var i=0;i<html.length;i++)
-            {
-                html_str+=html[i];
-            }
-            index=index+1;
-            $("#modal_body").append(responseText);
-            $(".upload-remove-img").tooltip({
-                'trigger': 'hover',
-                'placement': 'top'
-            });
-            $('.upload-remove-img').click(function() {$(this).parents('.upload-img').fadeOut("slow",function(){$(this).remove()}); }); /*remove upload img*/
-        }
+        
         $(document).ready(function(){
         	$(".postToFriend").mention({
             users:{#$users#}
@@ -171,7 +155,7 @@
                 $("#modal_body1").append("<div class='upload-img loader'><img src='../../Controller/resources/img/loader.gif' alt='Uploading....'/></div>");
                 $("#selectImgAtFriend_form").ajaxForm({
                    // data:{photo_index:index},
-                    target: '#modal_body1',
+                  //  target: '#modal_body1',
                     success:showResponse_atFriends
                 }).submit();
             });
@@ -186,6 +170,7 @@
         });
     </script>
     <title>Photowall-个人主页</title>
+    <script type="text/javascript" src="../../View/resources/js/search.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -201,19 +186,6 @@
             <li><a href="#">我的墙</a>
                 <ul>
                     <li><a href="../album/show_album.php">展示墙</a>
-                    <!--
-                        <ul>
-                            <li><a href="#">Sub-Level Item</a></li>
-                            <li><a href="#">Sub-Level Item</a>
-                                <ul>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Sub-Level Item</a></li>
-                        </ul>
-                        </ul>-->
                     </li>
                     <li><a href="../album/paste_album.php">贴友墙</a></li>
                 </ul>
@@ -239,11 +211,13 @@
                     <li><a href="#">绑定</a></li>
                 </ul>
             </li>
-			<li style="width:250px; height:34px;">
-                <form method="get" action="/search" id="search">
-                  	<input name="q" type="text" size="30" placeholder="搜索-贴友/粉丝/关注" />
-                    <button type="submit" class="btn btn-nav" value="submit"><i class="icon-search"></i></button>
-                </form>
+            <li style="width:250px; height:34px;">
+                <div id="search-area">
+                    <input name="q" type="text" size="30" class="search" id="inputSearch" placeholder="搜索-贴友/粉丝/关注" />
+                    <div id="divResult">
+                    </div>
+                    <button type="submit" class="btn btn-nav right" value="submit"><i class="icon-search"></i></button>
+                </div>
             </li>
             <li class="current">
                 <a href="#photoUploadOption" data-toggle="modal" style="width:15px; margin-left:30px;"><i class="icon-camera icon-white"></i></a>
@@ -293,7 +267,7 @@
                         <div class="tabbable">
                             <ul class="red-bar nav nav-tabs" id="myTabs">
                                 <li class="active"><a href="#home" data-toggle="tab">贴友墙动态 <span class="badge">{#$index_friends_movement#}</span></a></li>
-                                <li><a href="#bar" data-toggle="tab">照片墙动态 <span class="badge">1</span></a></li>
+                                <li><a href="#bar" data-toggle="tab">照片墙动态 <span class="badge">{#$index_ptw_movement#}</span></a></li>
                             </ul>
 
                             <div class="news-box tab-content">
@@ -654,6 +628,8 @@
             <div class="row-fluid">
                 <div class="span12 img-box">
                     <img id="photo_for_comment_display" class="img-polaroid img-orig" width="600" src="../../View/resources/img/photos/snow-covered-trees.jpg" />
+                    <p class="carousel-control left" id="myModalLeftArrow" onclick="" data-slide="prev">‹</p>
+                    <p class="carousel-control right" id="myModalRightArrow" onclick="" data-slide="next">›</p>
                     <p></p>
                     <p class="no-space">郊外美丽的雪景，一片银白</p>
                     <hr />
@@ -754,17 +730,17 @@
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h4><i class="icon-camera icon-white"></i> 上传照片 贴给贴友</h4>
         </div>
-        <form action="../photo/store_info_to_DB.php" method="post" id="upload_final1" >
+        <form action="../photo/store_photo_to_DB_at_friends.php" method="post" id="upload_final1" >
             <div class="modal-body photo-upload-container" id="modal_body1" >
             	
-                <div class="upload-img">
+               <!--  <div class="upload-img">
                     <img src="../../View/resources/img/follower/profile_img_test1.png" class="img-polaroid img-large"/>
                     <div class="upload-descript-box">
                         <span class="descript-arrow"></span>
                         <i class="icon-remove upload-remove-img" onclick="removeImg()" title="删除"></i></a>
                         <textarea placeholder="添加描述" maxlength="240" class="upload-descript-content"></textarea>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
             <div class="modal-footer row-fluid photo-upload-footer">
@@ -773,35 +749,38 @@
                             <div class="control-group no-space">
                                 <label class="control-label span6">贴给指定贴友</label>
                                 <div class="controls span6">
-                                    <input type="text" class="postToFriend" class="input-small" />
+                                    <input type="text" class="postToFriend" class="input-small" name="mark_textbox" id="mark_textbox" />
                                 </div>
                             </div>
                             <div class="control-group no-space">
                                 <label class="control-label span6" for="postToTag">贴给标签分组</label>
                                 <div class="controls span6">
-                                    <select id="postToTagAtFriend" class="input-small">
-                                        <option value="groupId1002">美食</option> <!--load groups names and id to this select-->
-                                        <option value="groupId1985">风景</option>
-                                        <option value="groupId1045">足球</option>
-                                        <option value="groupId1024">篮球</option>
-                                        <option value="groupId1025">美女</option>
+                                    <select id="postToTagAtFriend" name="postToTagAtFriend" class="input-small">
+                                        <option value="food">美食</option> <!--load groups names and id to this select-->
+                                        <option value="view">风景</option>
+                                        <option value="soccer">足球</option>
+                                        <option value="basketball">篮球</option>
+                                        <option value="girls">美女</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="control-group no-space">
                                 <label class="control-label span6" for="postToAllAtFriend">贴给所有粉丝</label>
                                 <div class="controls span6">
-                                    <select id="postToAllAtFriend" class="input-small">
+                                    <select id="postToAllAtFriend" name="postToAllAtFriend" class="input-small">
                                         <option value="yes">是</option>
                                         <option value="no" selected="selected">否</option>
                                     </select>
                                 </div>
+                                选择相册:&nbsp;&nbsp;&nbsp;&nbsp;<select class="span7" name="album_id" id="album_id">
+                                    {#$album_html#}
+                                </select>
                             </div>
                         </div>
                         <div class="span6 offset2">
                             <div class="single-photo-descript-box">
                                 <span class="descript-arrow"></span>
-                                <textarea placeholder="添加描述" col="50" row="8" class="upload-descript-content"></textarea>
+                                <textarea placeholder="添加描述" col="50" row="8" class="upload-descript-content" name="marked_description"></textarea>
                             </div>
                         </div>
                     </div>
@@ -810,7 +789,7 @@
                         <p style="font-size:10px;">按住Ctrl键可多选照片<br/>每次最多上传5张照片</p>
                     </div>
                     <a href="#" class="btn btn-large" onclick='imgUploadAtFriend();'>选择照片</a>
-                    <a href="#" class="btn btn-large btn-primary" onclick='javascript:finish_upload_photo();'>完成上传</a>
+                    <a href="#" class="btn btn-large btn-primary" onclick='javascript:finish_mark_and_upload();'>完成上传</a>
 
                 </form>
                 <form action="../photo/add_photo_to_at_friends_action.php" method="post" enctype="multipart/form-data" id="selectImgAtFriend_form" >
@@ -967,7 +946,7 @@
   <!--   <script type="text/javascript" src="../../View/resources/js/directly_at_friends/filedrag.js"></script> -->
     <script type="text/javascript" src="../../View/resources/js/bootstrap-tab.js"></script>
     <script type="text/javascript" src="../../View/resources/js/comment/comment.js"></script>
-    <script type="text/javascript" src="../../View/resources/js/directly_at_friends/at_friends.js"></script>
+   
     <script type='text/javascript' src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
     <script type='text/javascript' src="../../View/resources/js/mention.js"></script>
     <script type='text/javascript' src="../../View/resources/js/jquery.tinylimiter.js"></script>

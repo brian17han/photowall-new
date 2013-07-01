@@ -5,6 +5,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 	<script src="../../View/resources/js/validation.js"></script>
 	<script src="../../View/resources/js/jquery.js"></script>
+	<script type="text/javascript" src="../../Controller/resources/JQuery_Plugins/ajax_form/jquery.form.js"></script>
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap-responsive.css">
     <script type="text/javascript" src="../../View/resources/js/bootstrap.min.js"></script>
@@ -16,6 +17,38 @@
 			});
 			$(":password").val("");
 		});
+		function open_album(photo_id,photo_path){
+	    	 var photo_for_comment_display_obj=document.getElementById("photo_for_comment_display");
+             photo_for_comment_display_obj.src=photo_path;
+            //because the photo_name is unique, so we just get the photo_name to acquire the photo_id
+             var photo_name_first_slash_index=photo_path.lastIndexOf("/");
+             var photo_name=photo_path.substring(photo_name_first_slash_index+1);
+             var photo_name_for_comment_obj=document.getElementById("photo_name_for_comment");
+             photo_name_for_comment_obj.value=photo_name;
+             //start to load all comments for this photo
+             $.ajax({
+                type: "POST",
+                url: "../comment/load_all_comment.php",
+                data: { photo_name:photo_name }
+             }).done(function( msg ) {
+                 $("#comment-box").html(msg);
+             }); 
+	    }
+	    var comment_html="";
+function comment_success(responseText, statusText)
+{
+    comment_html+=responseText;
+     $("#comment-box").append(responseText);
+}
+function send_comment()
+{
+    var photo_name=document.getElementById("photo_name_for_comment").value;
+    $("#photo_comment_form").ajaxForm({
+        data:{photo_name:photo_name},
+       // target: '#comment-box',
+        success:comment_success
+    }).submit();
+}
 	</script>
     <script><!--show hide buttons-->
     $(document).ready(function(show_hide) {
@@ -41,25 +74,12 @@
                 <li><a href="../home/home.php" style="width:20px;"><i class="icon-home"></i></a></li>
                 <li class="current"><a href="#">我的墙</a>
                     <ul>
-                        <li><a href="#">展示墙</a>
-                            <!--
-                                <ul>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                    <li><a href="#">Sub-Level Item</a>
-                                        <ul>
-                                            <li><a href="#">Sub-Level Item</a></li>
-                                            <li><a href="#">Sub-Level Item</a></li>
-                                            <li><a href="#">Sub-Level Item</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                </ul>
-                                </ul>-->
+                        <li><a href="../album/show_album.php">展示墙</a>
                         </li>
                         <li><a href="#">贴友墙</a></li>
                     </ul>
                 </li>
-                <li><a href="profile_people.php?see_what=null">贴友薄</a>
+                <li><a href="../relation/profile_people.php?see_what=null">贴友薄</a>
                     <ul>
                         <li><a href="profile_people.php?see_what=friends">我的贴友</a></li>
                         <li><a href="profile_people.php?see_what=concerns">我的关注</a></li>
@@ -94,65 +114,49 @@
         <!--nav bar ends-->
     </div>
     <div class="main_content">
-    {#foreach key=k item=index from=$friends_array#}
-    {#if $friends_array[$k].first_letter ne $letter_storage[$k]#} 
     <div class="list">
-    	<div class="album-path"><h3>我的相册 <i class="icon-arrow-right"></i> 相册名称 </h3></div>
+    	<div class="album-path"><h3>我的相册 <i class="icon-arrow-right"></i>{#$album_name#}</h3></div>
         <button type="button" class="btn"><i class="icon-upload"></i> <span class="text-error">上传照片</span></button>
         <button type="button" class="btn"><i class="icon-plus"></i> <span class="text-error">新建相册</span></button>
         <br/>
-        {#if $k ne 0#}
-          <hr class="hr"/>
-        {#/if#}
-    	  <ul> 
-    	  	 <li class="user_info">
-                	<div class="profile_img_big">
-                		{#foreach key=key2 item=item2 from=$index#}
-                          <!--</div>{#$key2#} : {#$item2#}-->
-                          {#if $key2 eq head_photo#}
-                            <a href="#myModal" class="no-link offset1" data-toggle="modal">
-                                <img height="117" width="151" onclick="see_single_photo(this);" src="{#$result_friend_movement[index].photo_path#}" class="img-polaroid img-large"/>
-                            </a>
-                          {#/if#} 
-                        {#/foreach#}
+        <hr class="hr"/>
+    	<ul>
+            <li class="user_info">
+                <div class="img-large">
+                    <a href="#myModal" class="no-link" data-toggle="modal">
+                        <img onclick="see_single_photo(this);" src="../../View/resources/img/photos/car.jpg" class="img-polaroid img-large"/>
+                    </a>
+                </div>
+                <p onclick="window.location='http://google.com' ">照片名</p>
+                <div class="list_action hideV">
+                    <div class="list_action_button" onclick=" ">
+                        <p>重命名</p>
                     </div>
-                    <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
-                    <div class="list_action hideV">
-                        <div class="list_action_button" onclick=" ">
-                            <p>访问</p>
-                        </div>
-                        <div class="list_action_button" onclick="delete_friend({#$friends_array[$k].user_id#});" >
-                            <p>删除</p>
-                        </div>
+                    <div class="list_action_button" onclick="" >
+                        <p>删除</p>
                     </div>
-             </li>
-       
-    {#else#}
-             <li class="user_info">
-                	<div class="profile_img_big" onclick="window.location='http://google.com' ">
-                		{#foreach key=key2 item=item2 from=$index#}
-                          <!--</div>{#$key2#} : {#$item2#}-->
-                          {#if $key2 eq head_photo#}
-                              <img src="{#$item2#}" height="117" width="151" />
-                          {#/if#} 
-                        {#/foreach#}
+                </div>
+            </li>
+            {#section name=photo loop=$photo_2d_array#}
+            <li class="user_info">
+               <div class="img-display img-polaroid" onclick='open_album("{#$photo_2d_array[photo].photo_id#}","{#$photo_2d_array[photo].photo_path#}")'>
+                    <a href="#myModal" class="no-link img-large" data-toggle="modal" style="background-image: url({#$photo_2d_array[photo].photo_path#});">
+                       <!--  <img  src="{#$photo_2d_array[photo].photo_path#}" class="img-polaroid img-large"/> -->
+                    </a>
+                </div>
+                <p onclick="window.location='http://google.com' ">照片名</p>
+                <div class="list_action hideV">
+                    <div class="list_action_button" onclick="">
+                        <p>重命名</p>
                     </div>
-                    <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
-                    <div class="list_action hideV">
-                        <div class="list_action_button" onclick=" ">
-                            <p>访问</p>
-                        </div>
-                        <div class="list_action_button" onclick="delete_friend({#$friends_array[$k].user_id#});" >
-                            <p>删除</p>
-                        </div>
+                    <div class="list_action_button" onclick="" >
+                        <p>删除</p>
                     </div>
-             </li>
-    {#/if#}
-    {#if $friends_array[$k+1].first_letter ne $letter_storage[$k+1]#} 
-        </ul>
+                </div>
+              </li>
+             {#/section#}
+       </ul>
     </div>
-    {#/if#}
-    {#/foreach#}
 	</div><!--main_content ends-->
     <div class="footer">
     	<div class="copyright">

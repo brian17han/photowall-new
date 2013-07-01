@@ -4724,8 +4724,8 @@ a.thumbnail:focus {
     filter: alpha(opacity=80);
 }
 .modal {
-    position: fixed;
-    top: 10%;
+    position: absolute;
+    top: 5%;
     left: 46%;
     z-index: 1050;
     width: 560px;
@@ -4755,7 +4755,7 @@ a.thumbnail:focus {
     top: -25%;
 }
 .modal.fade.in {
-    top: 10%;
+    top: 5%;
 }
 .modal-header {
     padding: 9px 15px;
@@ -6357,6 +6357,19 @@ button.close {
 .img-orig{
     width:600px;
 }
+.img-display{
+    width: 140px;
+    height: 140px;
+}
+.img-display a{
+    display: inline-block;
+    height: 140px;
+    width: 140px;
+    overflow: hidden;
+    background-position: center;
+    background-size:300px;
+}
+
 .comment-small{
     font-size: 11px;
     color: black;
@@ -6407,6 +6420,7 @@ button.close {
     height:30px !important;
 }
 
+
 .btn-nav{
     padding: 8px 8px;
     font-size: 15px;
@@ -6419,10 +6433,16 @@ button.close {
 .btn-nav:hover{
     background: #ce3334;
 }
+#myModal{
+    top:50px !important;
+}
+#myModalRightArrow{
+    right:8px;
+}
 #photoUploadOption{
     width:500px !important;
     height:50px;
-    top:40%;
+    top:20%;
     left:52%;
 }
 #photoUploadOption .modal-footer{
@@ -6514,7 +6534,12 @@ button.close {
 #photoimg{    /*button for upload img*/
 
 }
-
+.vip{
+    color:#dab244 !important;
+}
+.text-inline{
+    display:inline;
+}
 
 
 
@@ -6712,7 +6737,7 @@ html[xmlns] #nav {
 * html #nav {
     height: 1%;
 }
-#search{
+#search-area{
     display:block;
     float:right;
     margin-right:0px;
@@ -6749,4 +6774,66 @@ html[xmlns] #nav {
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
+
+/*Search and Dropdown Type ahead Starts*/
+#inputSearch
+{
+    width:120px;
+    border: 0 none;
+    font: bold 12px Arial,Helvetica,Sans-serif;
+    color: #4f4f4f;
+    height:16px;
+    margin-top:auto;
+    margin-bottom:auto;
+    padding: 9px 15px 9px 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -webkit-transition: all 0.7s ease 0s;
+    -moz-transition: all 0.7s ease 0s;
+    -o-transition: all 0.7s ease 0s;
+    transition: all 0.7s ease 0s;
+}
+#inputSearch:focus {
+    color: #4f4f4f;
+    width: 170px;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+}
+#divResult
+{
+    position:absolute;
+    width:200px;
+    display:none;
+    margin-top:-1px;
+    border:solid 1px #dedede;
+    border-top:0px;
+    overflow:hidden;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    -moz-border-bottom-right-radius: 6px;
+    -moz-border-bottom-left-radius: 6px;
+    box-shadow: 0px 0px 5px #999;
+    border-width: 3px 1px 1px;
+    border-style: solid;
+    border-color: #333 #DEDEDE #DEDEDE;
+    background-color: white;
+}
+.display_box
+{
+    padding:4px; border-top:solid 1px #dedede;
+    font-size:12px; height:50px;
+}
+.display_box:hover
+{
+    background:#3bb998;
+    color:#FFFFFF;
+    cursor:pointer;
+}
+/*Search and Dropdown Type ahead Ends*/
 /*-----------Nav-Bar--------ends----------------------------*/

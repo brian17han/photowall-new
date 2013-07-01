@@ -75,9 +75,7 @@ a:hover p{
 	-moz-box-shadow: 0 8px 6px -6px black;
 	box-shadow: 0 8px 6px -6px black;
 }
-.vip{
-		color:#dab244 !important;
-}
+
 
 .rec-friend{
 	padding-bottom:5px;
@@ -101,9 +99,7 @@ a:hover p{
 #myTabs{
     background-size: 100% 40px !important;
 }
-#myModal{
-    top:0 !important;
-}
+
 
 /*------------scrollbar style-----------*/
 /* Let's get this party started */
