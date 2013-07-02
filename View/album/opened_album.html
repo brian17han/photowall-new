@@ -139,7 +139,7 @@ function send_comment()
             </li>
             {#section name=photo loop=$photo_2d_array#}
             <li class="user_info">
-               <div class="img-display img-polaroid" onclick='open_album("{#$photo_2d_array[photo].photo_id#}","{#$photo_2d_array[photo].photo_path#}")'>
+               <div class="img-display-large img-polaroid" onclick='open_album("{#$photo_2d_array[photo].photo_id#}","{#$photo_2d_array[photo].photo_path#}")'>
                     <a href="#myModal" class="no-link img-large" data-toggle="modal" style="background-image: url({#$photo_2d_array[photo].photo_path#});">
                        <!--  <img  src="{#$photo_2d_array[photo].photo_path#}" class="img-polaroid img-large"/> -->
                     </a>
