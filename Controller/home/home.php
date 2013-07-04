@@ -4,6 +4,13 @@ require_once('../../Controller/Validation/validate_string.php');
 require_once 'friends_info_page.php';//���ҳ����������ʾ ��ע  ��˿ ���ѵ�  
 require_once 'load_all_friends.php';////����ļ���ר����������ݿ���������к���id��д��txt�ļ���
 require_once 'friends_recommendations.php';//�����ר���������������Ƽ����ѵ�
+function Check_Vertical_Line($multi_photo_name)
+{
+	if(stripos($multi_photo_name, "|")==False)
+	   return $multi_photo_name;
+	else
+		return substr($multi_photo_name, 0,stripos($multi_photo_name, "|"));
+}
 $smarty->assign("concern",$concern);
 $smarty->assign("head_photo_big_thumbnail",$head_photo_big_thumbnail);
 $smarty->assign("fans",$fans);
@@ -66,7 +73,7 @@ while($out=mysql_fetch_array($query_concern))
 }
 
 //this is to load all of the news in photowall_movement
-$sql_photowall_news="select nick_name, date, one_of_photo_path,photo_uploaded_amount from photowall_movement where 
+$sql_photowall_news="select nick_name, date, one_of_photo_path,photo_uploaded_amount, all_photo_id from photowall_movement where 
                      user_id IN (";
 for ($i=0; $i <count($my_friends_and_concern_id); $i++)
 	$sql_photowall_news.=$my_friends_and_concern_id[$i].",";
@@ -76,15 +83,16 @@ $query_photowall_movement=mysql_query($sql_photowall_news);
 $result_photowall_movement=array();$index_ptw_movement=0;
 while($out=mysql_fetch_array($query_photowall_movement))
 {
-	$temp=array("nick_name"=>$out["nick_name"],"date"=>$out["date"],"one_of_photo_path"=>"../Project_Images/photos/".$out["one_of_photo_path"],
-	            "photo_uploaded_amount"=>$out["photo_uploaded_amount"]);
+	$temp=array("nick_name"=>$out["nick_name"],"date"=>$out["date"],"one_of_photo_path"=>"../Project_Images/photos/".Check_Vertical_Line($out["one_of_photo_path"]),
+	            "photo_uploaded_amount"=>$out["photo_uploaded_amount"],"all_photo_id"=>$out["all_photo_id"],
+	            "all_photo_names"=>$out["one_of_photo_path"]);
 	$result_photowall_movement[$index_ptw_movement]=$temp;
 	$index_ptw_movement++;
 }
 
 
 //this is to load all of the news in friends_movement
-$sql_friends_news="select marker_nick_name,be_marked_user_id,photo_path,date from friends_movement where marker_user_id
+$sql_friends_news="select marker_nick_name,be_marked_user_id,photo_path,date,photo_uploaded_amount, all_photo_id from friends_movement where marker_user_id
                    IN (";
 for ($i=0; $i <count($only_friends_id) ; $i++)  
 	$sql_friends_news.=$only_friends_id[$i].",";
@@ -97,7 +105,9 @@ while($out=mysql_fetch_array($query_friends_movement))
 	if(in_array($_SESSION["user_id"], $single_line_of_ids))
 	{
 	   $temp=array("marker_nick_name"=>$out["marker_nick_name"],"be_marked_user_id"=>$out["be_marked_user_id"],
-	               "photo_path"=>$out["photo_path"],"date"=>$out["date"]);
+	               "photo_path"=>"../Project_Images/photos/".Check_Vertical_Line($out["photo_path"]),
+	               "date"=>$out["date"],"photo_uploaded_amount"=>$out["photo_uploaded_amount"],"all_photo_id"=>$out["all_photo_id"],
+	               "all_photo_names"=>$out["photo_path"]);
 	   $result_friend_movement[$index_friends_movement]=$temp;
 	   $index_friends_movement++;
 	}
@@ -105,7 +115,7 @@ while($out=mysql_fetch_array($query_friends_movement))
 $smarty->assign("result_photowall_movement",$result_photowall_movement);
 $smarty->assign("result_friend_movement",$result_friend_movement);
 $smarty->assign("index_friends_movement",$index_friends_movement);
-$smarty->assign("index_ptw_movement",($index_ptw_movement));
+$smarty->assign("index_ptw_movement",$index_ptw_movement);
 $smarty->assign("users",json_encode($result_array));
 $smarty->assign("album_html",$album_html);
 $smarty->display("home/home.html");

@@ -1,8 +1,9 @@
-#Thu Jun 13 11:51:48 EDT 2013
+#Fri Jun 28 15:20:53 EDT 2013
 eclipse.preferences.version=1
 encoding//Controller/login/login_action.php=UTF-8
-encoding//Controller/photo/add_photo_action.php=UTF-8
+encoding//Controller/photo/add_photo_actionxxxxx.php=UTF-8
 encoding//Controller/photo/add_photo_to_at_friends_action.php=UTF-8
+encoding//Controller/photo/store_photo_to_DB_at_friends.php=UTF-8
 encoding//Controller/profile/load_fans_concerns_friends.php=UTF-8
 encoding//Controller/profile/profile_action.php=UTF-8
 encoding//Controller/register/register_action.php=UTF-8

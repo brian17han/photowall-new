@@ -32,9 +32,9 @@
             </div>
             <ul id="nav">
                 <li><a href="../home/home.php" style="width:20px;"><i class="icon-home"></i></a></li>
-                <li class="current"><a href="#">我的墙</a>
+                <li class="current"><a href="../album/show_album.php">我的墙</a>
                     <ul>
-                        <li><a href="#">展示墙</a>
+                        <li><a href="../album/show_album.php">展示墙</a>
                             <!--
                                 <ul>
                                     <li><a href="#">Sub-Level Item</a></li>
@@ -49,7 +49,7 @@
                                 </ul>
                                 </ul>-->
                         </li>
-                        <li><a href="#">贴友墙</a></li>
+                        <li><a href="../album/paste_album.php">贴友墙</a></li>
                     </ul>
                 </li>
                 <li><a href="profile_people.php?see_what=null">贴友薄</a>
@@ -87,44 +87,24 @@
         <!--nav bar ends-->
     </div>
     <div class="main_content">
-    {#foreach key=k item=index from=$friends_array#}
-    {#if $friends_array[$k].first_letter ne $letter_storage[$k]#} 
-    <div class="list">
-    	<div class="album-path"><h3>我被贴的话题</h3></div>
-    	{#if $k ne 0#}
-          <hr class="hr"/>
-        {#/if#}
-    	  <ul> 
-    	  	 <li class="user_info">
-                	<div class="profile_img_big" onclick="window.location='http://google.com' ">
-                		{#foreach key=key2 item=item2 from=$index#}
-                          <!--</div>{#$key2#} : {#$item2#}-->
-                          {#if $key2 eq head_photo#}
-                              <img src="{#$item2#}" height="117" width="151" />
-                          {#/if#} 
-                        {#/foreach#}
-                    </div>
-                    <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
-              </li>
-       
-    {#else#}
+    <div class="list" id="letter_a">
+    		<div class="album-path"><h3>我被贴的话题</h3></div>
+            <div ><h3></h3></div>
+            <!--[if IE]>
+            <hr />
+            <![endif]-->
+        	<hr class="hr"/>
+        <ul>
+         {#section name=new loop=$result#}
              <li class="user_info">
-                	<div class="profile_img_big" onclick="window.location='http://google.com' ">
-                		{#foreach key=key2 item=item2 from=$index#}
-                          <!--</div>{#$key2#} : {#$item2#}-->
-                          {#if $key2 eq head_photo#}
-                              <img src="{#$item2#}" height="117" width="151" />
-                          {#/if#} 
-                        {#/foreach#}
-                    </div>
-                    <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
-              </li>
-    {#/if#}
-    {#if $friends_array[$k+1].first_letter ne $letter_storage[$k+1]#} 
+                <div class="profile_img_big" onclick='open_album("{#$result[new].photo_path#}")'>
+                    <img src="{#$result[new].photo_path#}" height="117" width="151"/>
+                </div>
+                  <!--   <p onclick="window.location='http://google.com' ">用户名</p> -->
+             </li>
+         {#/section#}
         </ul>
-    </div>
-    {#/if#}
-    {#/foreach#}
+       </div>
 	</div><!--main_content ends-->
     <div class="footer">
     	<div class="copyright">

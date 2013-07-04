@@ -10,12 +10,17 @@
     <script type="text/javascript" src="../../View/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../View/resources/js/bootstrap-tab.js"></script>
 	<script>
+	    function open_album(album_id,album_name)
+		{
+			window.location.href="../album/show_single_album.php?album_id="+album_id+"&album_name="+album_name;
+		}
 		$(document).ready(function(){
 			$(":text").each(function(){
 				$(this).val("");
 			});
 			$(":password").val("");
 		});
+		
 	</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Photowall-我的展示墙</title>
@@ -34,29 +39,16 @@
                 <li><a href="../home/home.php" style="width:20px;"><i class="icon-home"></i></a></li>
                 <li class="current"><a href="#">我的墙</a>
                     <ul>
-                        <li><a href="#">展示墙</a>
-                            <!--
-                                <ul>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                    <li><a href="#">Sub-Level Item</a>
-                                        <ul>
-                                            <li><a href="#">Sub-Level Item</a></li>
-                                            <li><a href="#">Sub-Level Item</a></li>
-                                            <li><a href="#">Sub-Level Item</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                </ul>
-                                </ul>-->
+                        <li><a href="../album/show_album.php">展示墙</a>
                         </li>
-                        <li><a href="#">贴友墙</a></li>
+                        <li><a href="../album/paste_album.php">贴友墙</a></li>
                     </ul>
                 </li>
-                <li><a href="profile_people.php?see_what=null">贴友薄</a>
+                <li><a href="../relation/profile_people.php?see_what=null">贴友薄</a>
                     <ul>
-                        <li><a href="profile_people.php?see_what=friends">我的贴友</a></li>
-                        <li><a href="profile_people.php?see_what=concerns">我的关注</a></li>
-                        <li><a href="profile_people.php?see_what=fans">我的粉丝</a></li>
+                        <li><a href="../relation/profile_people.php?see_what=friends">我的贴友</a></li>
+                        <li><a href="../relation/profile_people.php?see_what=concerns">我的关注</a></li>
+                        <li><a href="../relation/profile_people.php?see_what=fans">我的粉丝</a></li>
                     </ul>
                 </li>
                 <li><a href="#">个人资料</a>
@@ -87,44 +79,54 @@
         <!--nav bar ends-->
     </div>
     <div class="main_content">
-    {#foreach key=k item=index from=$friends_array#}
-    {#if $friends_array[$k].first_letter ne $letter_storage[$k]#} 
-    <div class="list">
     	<div class="album-path"><h3>我的相册</h3></div>
-    	{#if $k ne 0#}
-          <hr class="hr"/>
-        {#/if#}
-    	  <ul> 
-    	  	 <li class="user_info">
+    	<div class="list" id="letter_a">
+            <div ><h3></h3></div>
+        	<hr class="hr"/>
+            <ul>
+            	 <!-- <li class="user_info">
                 	<div class="profile_img_big" onclick="window.location='http://google.com' ">
-                		{#foreach key=key2 item=item2 from=$index#}
-                          <!--</div>{#$key2#} : {#$item2#}-->
-                          {#if $key2 eq head_photo#}
-                              <img src="{#$item2#}" height="117" width="151" />
-                          {#/if#} 
-                        {#/foreach#}
+                    	<img src="../../View/resources/img/follower/profile_img_test1.png" height="117" width="151"/>
                     </div>
-                    <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
-              </li>
-       
-    {#else#}
-             <li class="user_info">
-                	<div class="profile_img_big" onclick="window.location='http://google.com' ">
-                		{#foreach key=key2 item=item2 from=$index#}
-                          <!--</div>{#$key2#} : {#$item2#}-->
-                          {#if $key2 eq head_photo#}
-                              <img src="{#$item2#}" height="117" width="151" />
-                          {#/if#} 
-                        {#/foreach#}
+                    <p onclick="window.location='http://google.com' ">用户名</p>
+                    <div class="list_action hideV">
+                    	<div class="list_action_button" onclick="window.location='http://google.com' ">
+                        	<p>访问</p>
+                        </div>
+						<div class="list_action_button" onclick="delete">
+                        	<p>删除</p>
+                        </div>                    
                     </div>
-                    <p onclick="window.location='http://google.com' ">{#$friends_array[$k].nick_name#}</p>
+              </li>-->
+                <!-- {#section name=album loop=$album_2d_array#}
+                <li class="user_info">
+                	<div class="profile_img_big" onclick="open_album('{#$album_2d_array[album].album_id#}','{#$album_2d_array[album].album_name#}')">
+                    	<img src="{#$album_2d_array[album].cover#}" height="117" width="151" class="img-polaroid img-large"/>
+                    </div>
+                     <p onclick="">{#$album_2d_array[album].album_name#}</p>
+                </li>
+                {#/section#} -->
+                {#section name=album loop=$album_2d_array#}
+                <li class="user_info">
+                   <div class="img-display img-polaroid" onclick="open_album('{#$album_2d_array[album].album_id#}','{#$album_2d_array[album].album_name#}')">
+                      <a href="#myModal" class="no-link img-large" data-toggle="modal" style="background-image: url({#$album_2d_array[album].cover#});">
+                       <!--  <img  src="{#$photo_2d_array[photo].photo_path#}" class="img-polaroid img-large"/> -->
+                      </a>
+                   </div>
+                <p onclick="">{#$album_2d_array[album].album_name#}</p>
+                <div class="list_action hideV">
+                    <div class="list_action_button" onclick="">
+                        <p>重命名</p>
+                    </div>
+                    <div class="list_action_button" onclick="" >
+                        <p>删除</p>
+                    </div>
+                </div>
               </li>
-    {#/if#}
-    {#if $friends_array[$k+1].first_letter ne $letter_storage[$k+1]#} 
-        </ul>
-    </div>
-    {#/if#}
-    {#/foreach#}
+               {#/section#}
+            </ul>
+        </div>
+        
 	</div><!--main_content ends-->
     <div class="footer">
     	<div class="copyright">

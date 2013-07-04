@@ -1,5 +1,5 @@
 ﻿<?php @session_start();
-$conn=mysql_connect("localhost","root","");
+$conn=mysql_connect("localhost","root","admin");
 mysql_select_db("new_photowall",$conn);
 
 $sql_friend1="select friends.reviewer_id, user.head_photo, user.user_id, user.nick_name, user.login_name from friends,user where
@@ -8,7 +8,6 @@ $sql_friend1="select friends.reviewer_id, user.head_photo, user.user_id, user.ni
               friends.reviewer_id=18 and friends.applicant_id=user.user_id";
     $sql=$sql_friend1." UNION ".$sql_friend2;
     $query=mysql_query($sql);
-   // $query2=mysql_query($sql_friend2);
     $count=mysql_num_rows($query);
     $result=array("fans_count"=>$count,"ResultSet"=>$query);
     while($out=mysql_fetch_array($result["ResultSet"]))

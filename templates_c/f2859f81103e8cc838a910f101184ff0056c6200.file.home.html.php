@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2013-06-13 15:37:43
+<?php /* Smarty version Smarty-3.0.8, created on 2013-07-01 19:04:33
          compiled from "D:/xampp/htdocs/Local_Photowall/View\home/home.html" */ ?>
-<?php /*%%SmartyHeaderCode:2668451b9e74771f961-32410449%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:1312651d1d2c1bbf390-59206435%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     'f2859f81103e8cc838a910f101184ff0056c6200' => 
     array (
       0 => 'D:/xampp/htdocs/Local_Photowall/View\\home/home.html',
-      1 => 1371137855,
+      1 => 1372705470,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '2668451b9e74771f961-32410449',
+  'nocache_hash' => '1312651d1d2c1bbf390-59206435',
   'function' => 
   array (
   ),
@@ -29,13 +29,18 @@ $_smarty_tpl->decodeProperties(array (
     <script type="text/javascript" src="../../View/resources/js/validation.js"></script>
     <script type="text/javascript" src="../../View/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../View/resources/js/friends_news/home.js"></script>
+     <script type="text/javascript" src="../../View/resources/js/directly_at_friends/at_friends.js"></script>
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/walls.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap-responsive.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/recommended-styles.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/styles.css">
     <script>
-        var html=new Array();
+    function give_up()
+    {
+    	$("#modal_body").html("");
+    }
+        var html_to_album=new Array();
         var marked_people_photo_array=new Array();
         function create_album_success(){alert("创建成功!");}
         function create_album()
@@ -57,9 +62,9 @@ $_smarty_tpl->decodeProperties(array (
         var index=0;
         function cancel_upload()
         {
-            for(var i=0;i<html.length;i++)
-                html[i]="";
-            html=new Array();
+            for(var i=0;i<html_to_album.length;i++)
+                html_to_album[i]="";
+            html_to_album=new Array();
         }
         function At_People(full_path)
         {
@@ -69,8 +74,8 @@ $_smarty_tpl->decodeProperties(array (
         function finish()
         {
             alert("上传成功!");
-            for(var i=0;i<html.length;i++){html[i]="";}
-            html=new Array();
+            for(var i=0;i<html_to_album.length;i++){html_to_album[i]="";}
+            html_to_album=new Array();
             marked_people_photo_array=new Array();
             document.getElementById("modal_body").innerHTML="";
         }
@@ -90,17 +95,28 @@ $_smarty_tpl->decodeProperties(array (
         function finish_upload_photo()
         {
             //var form_obj=document.getElementById("upload_final").submit();
-            var marked_string=Change_MkPple_Array_To_String(marked_people_photo_array);
+          //  var marked_string=Change_MkPple_Array_To_String(marked_people_photo_array);
             //alert(marked_string);
             $("#upload_final").ajaxForm({
-                data:{mark_info:marked_string},
+             //   data:{mark_info:marked_string},
                 success:finish
             }).submit();   
+        }
+        function removeImg_album(obj)
+        {
+        	var photo_name=obj.id;
+        	$.ajax({
+                type: "POST",
+                url: "../photo/delete_photo_action.php",
+                data: { photo_path:photo_name }
+            }).done(function( msg ) {
+                    });
         }
         function removeImg(obj,photo_name)
         {
             var id=obj.id;
-            html[id]="";
+            html_to_album[id]="";
+            
             var name=photo_name;
           //  if user delete a photo, then delete the corresponding marked info of people in marked_people_photo_array
             for(var i=0;i<marked_people_photo_array.length;i++)
@@ -125,24 +141,26 @@ $_smarty_tpl->decodeProperties(array (
                     });
         }
 
-        function showResponse(responseText, statusText)
+        function showResponse_album(responseText, statusText)
         {
-            //alert(responseText+","+statusText);
-            html.push(responseText);
+           // alert(responseText+","+statusText);
+            html_to_album.push(responseText);
             //html+=responseText;
             var html_str="";
-            for(var i=0;i<html.length;i++)
+            for(var i=0;i<html_to_album.length;i++)
             {
-                html_str+=html[i];
+                html_str+=html_to_album[i];
             }
-            index=index+1;
-            $("#modal_body").html(html_str);
+            $(".loader").remove();
+            $("#modal_body").append(responseText);
+            
             $(".upload-remove-img").tooltip({
                 'trigger': 'hover',
                 'placement': 'top'
             });
             $('.upload-remove-img').click(function() {$(this).parents('.upload-img').fadeOut("slow",function(){$(this).remove()}); }); /*remove upload img*/
         }
+        
         $(document).ready(function(){
         	$(".postToFriend").mention({
             users:<?php echo $_smarty_tpl->getVariable('users')->value;?>
@@ -154,24 +172,25 @@ $_smarty_tpl->decodeProperties(array (
             $(":password").val("");
 
             $('#selectImgAtFriend').live('change', function(){
-                $("#modal_body1").append('<img src="../../Controller/resources/img/loader.gif" alt="Uploading...."/>');
+                $("#modal_body1").append("<div class='upload-img loader'><img src='../../Controller/resources/img/loader.gif' alt='Uploading....'/></div>");
                 $("#selectImgAtFriend_form").ajaxForm({
                    // data:{photo_index:index},
-                    target: '#modal_body1',
-                    success:showResponse
+                  //  target: '#modal_body1',
+                    success:showResponse_atFriends
                 }).submit();
             });
             $('#selectImgToAlbum').live('change', function(){
-                $("#modal_body").append('<img src="../../Controller/resources/img/loader.gif" alt="Uploading...."/>');
+              $("#modal_body").append("<div class='upload-img loader'><img src='../../Controller/resources/img/loader.gif' alt='Uploading....'/></div>");
                 $("#upload_photo_form").ajaxForm({
                     data:{photo_index:index},
-                    target: '#modal_body',
-                    success:showResponse
+                  //  target: '#modal_body',
+                    success:showResponse_album
                 }).submit();
             });
         });
     </script>
     <title>Photowall-个人主页</title>
+    <script type="text/javascript" src="../../View/resources/js/search.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -186,22 +205,9 @@ $_smarty_tpl->decodeProperties(array (
             <li class="current"><a href="../home/home.php" style="width:20px;"><i class="icon-home icon-white"></i></a></li>
             <li><a href="#">我的墙</a>
                 <ul>
-                    <li><a href="#">展示墙</a>
-                    <!--
-                        <ul>
-                            <li><a href="#">Sub-Level Item</a></li>
-                            <li><a href="#">Sub-Level Item</a>
-                                <ul>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                    <li><a href="#">Sub-Level Item</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Sub-Level Item</a></li>
-                        </ul>
-                        </ul>-->
+                    <li><a href="../album/show_album.php">展示墙</a>
                     </li>
-                    <li><a href="#">贴友墙</a></li>
+                    <li><a href="../album/paste_album.php">贴友墙</a></li>
                 </ul>
             </li>
             <li><a href="../relation/profile_people.php?see_what=null">贴友薄</a>
@@ -225,10 +231,14 @@ $_smarty_tpl->decodeProperties(array (
                     <li><a href="#">绑定</a></li>
                 </ul>
             </li>
-			<li style="width:250px; height:34px;">
-                <form method="get" action="/search" id="search">
-                  	<input name="q" type="text" size="30" placeholder="搜索-贴友/粉丝/关注" />
-                    <button type="submit" class="btn btn-nav" value="submit"><i class="icon-search"></i></button>
+            <li style="width:250px; height:34px;">
+            	<form action="search_result.php" method="post">
+                <div id="search-area">
+                    <input name="keyword" type="text" size="30" class="search" id="inputSearch" placeholder="搜索-贴友/粉丝/关注" />
+                    <div id="divResult">
+                    </div>
+                    <button type="submit" class="btn btn-nav right" value="submit"><i class="icon-search"></i></button>
+                </div>
                 </form>
             </li>
             <li class="current">
@@ -280,7 +290,8 @@ $_smarty_tpl->decodeProperties(array (
                             <ul class="red-bar nav nav-tabs" id="myTabs">
                                 <li class="active"><a href="#home" data-toggle="tab">贴友墙动态 <span class="badge"><?php echo $_smarty_tpl->getVariable('index_friends_movement')->value;?>
 </span></a></li>
-                                <li><a href="#bar" data-toggle="tab">照片墙动态 <span class="badge">1</span></a></li>
+                                <li><a href="#bar" data-toggle="tab">照片墙动态 <span class="badge"><?php echo $_smarty_tpl->getVariable('index_ptw_movement')->value;?>
+</span></a></li>
                             </ul>
 
                             <div class="news-box tab-content">
@@ -312,15 +323,21 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['index']['last']       = ($_s
                                 	<div class="row-fluid photo-info">
                                         <div class="span4">
                                             <a href="#myModal" class="no-link offset1" data-toggle="modal">
-                                                <img onclick="see_single_photo(this);" src="<?php echo $_smarty_tpl->getVariable('result_friend_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['photo_path'];?>
-" class="img-polaroid img-large"/>
+                         
+                                                <img onclick="see_single_photo(this,'<?php echo $_smarty_tpl->getVariable('result_friend_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['all_photo_names'];?>
+');" id="<?php echo $_smarty_tpl->getVariable('result_friend_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['all_photo_id'];?>
+"
+                                                 src="<?php echo $_smarty_tpl->getVariable('result_friend_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['photo_path'];?>
+"
+                                                  class="img-polaroid img-large"/>
                                             </a>
                                         </div>
                                         <div class="span7">
                                             <h5><?php echo $_smarty_tpl->getVariable('result_friend_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['marker_nick_name'];?>
 </h5>
                                             <p>于<?php echo $_smarty_tpl->getVariable('result_friend_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['date'];?>
-上传<span class="text-error">1</span>张新照片！</p>
+上传<span class="text-error"><?php echo $_smarty_tpl->getVariable('result_friend_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['photo_uploaded_amount'];?>
+</span>张新照片！</p>
                                             <p>通过网页版客户端</p>
                                             <i class="icon-map-marker"></i><a class="location" href="#">五四广场</a>
                                             <hr/>
@@ -385,8 +402,13 @@ $_smarty_tpl->tpl_vars['smarty']->value['section']['index']['last']       = ($_s
                                 	<div class="row-fluid photo-info">
                                         <div class="span4">
                                             <a href="#myModal" class="no-link offset1" data-toggle="modal">
-                                                <img onclick="see_single_photo(this);" src="<?php echo $_smarty_tpl->getVariable('result_photowall_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['one_of_photo_path'];?>
-" class="img-polaroid img-large"/>
+                                
+                                                <img onclick="see_single_photo(this,'<?php echo $_smarty_tpl->getVariable('result_photowall_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['all_photo_names'];?>
+');" id="<?php echo $_smarty_tpl->getVariable('result_photowall_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['all_photo_id'];?>
+" 
+                                                src="<?php echo $_smarty_tpl->getVariable('result_photowall_movement')->value[$_smarty_tpl->getVariable('smarty')->value['section']['index']['index']]['one_of_photo_path'];?>
+" 
+                                                class="img-polaroid img-large"/>
                                             </a>
                                         </div>
                                         <div class="span7">
@@ -711,6 +733,9 @@ if ($_smarty_tpl->_count($_from) > 0){
             <div class="row-fluid">
                 <div class="span12 img-box">
                     <img id="photo_for_comment_display" class="img-polaroid img-orig" width="600" src="../../View/resources/img/photos/snow-covered-trees.jpg" />
+                    <p class="carousel-control left" onclick="see_prev_photo()" data-slide="prev">‹</p>
+                    <p class="carousel-control right" onclick="see_next_photo()" data-slide="next">›</p>
+
                     <p></p>
                     <p class="no-space">郊外美丽的雪景，一片银白</p>
                     <hr />
@@ -811,17 +836,17 @@ if ($_smarty_tpl->_count($_from) > 0){
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             <h4><i class="icon-camera icon-white"></i> 上传照片 贴给贴友</h4>
         </div>
-        <form action="../photo/store_info_to_DB.php" method="post" id="upload_final1" >
+        <form action="../photo/store_photo_to_DB_at_friends.php" method="post" id="upload_final1" >
             <div class="modal-body photo-upload-container" id="modal_body1" >
             	
-                <div class="upload-img">
+               <!--  <div class="upload-img">
                     <img src="../../View/resources/img/follower/profile_img_test1.png" class="img-polaroid img-large"/>
                     <div class="upload-descript-box">
                         <span class="descript-arrow"></span>
                         <i class="icon-remove upload-remove-img" onclick="removeImg()" title="删除"></i></a>
                         <textarea placeholder="添加描述" maxlength="240" class="upload-descript-content"></textarea>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
             <div class="modal-footer row-fluid photo-upload-footer">
@@ -830,44 +855,48 @@ if ($_smarty_tpl->_count($_from) > 0){
                             <div class="control-group no-space">
                                 <label class="control-label span6">贴给指定贴友</label>
                                 <div class="controls span6">
-                                    <input type="text" class="postToFriend" class="input-small" />
+                                    <input type="text" class="postToFriend" class="input-small" name="mark_textbox" id="mark_textbox" />
                                 </div>
                             </div>
                             <div class="control-group no-space">
                                 <label class="control-label span6" for="postToTag">贴给标签分组</label>
                                 <div class="controls span6">
-                                    <select id="postToTagAtFriend" class="input-small">
-                                        <option value="groupId1002">美食</option> <!--load groups names and id to this select-->
-                                        <option value="groupId1985">风景</option>
-                                        <option value="groupId1045">足球</option>
-                                        <option value="groupId1024">篮球</option>
-                                        <option value="groupId1025">美女</option>
+                                    <select id="postToTagAtFriend" name="postToTagAtFriend" class="input-small">
+                                        <option value="food">美食</option> <!--load groups names and id to this select-->
+                                        <option value="view">风景</option>
+                                        <option value="soccer">足球</option>
+                                        <option value="basketball">篮球</option>
+                                        <option value="girls">美女</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="control-group no-space">
-                                <label class="control-label span6" for="postToAll">贴给所有粉丝</label>
+                                <label class="control-label span6" for="postToAllAtFriend">贴给所有粉丝</label>
                                 <div class="controls span6">
-                                    <select id="postToAllAtFriend" class="input-small">
+                                    <select id="postToAllAtFriend" name="postToAllAtFriend" class="input-small">
                                         <option value="yes">是</option>
                                         <option value="no" selected="selected">否</option>
                                     </select>
                                 </div>
+                                选择相册:&nbsp;&nbsp;&nbsp;&nbsp;<select class="span7" name="album_id" id="album_id">
+                                    <?php echo $_smarty_tpl->getVariable('album_html')->value;?>
+
+                                </select>
                             </div>
                         </div>
-                        <div class="span7">
+                        <div class="span6 offset2">
                             <div class="single-photo-descript-box">
                                 <span class="descript-arrow"></span>
-                                <textarea placeholder="添加描述" col="50" row="8" class="upload-descript-content"></textarea>
+                                <textarea placeholder="添加描述" col="50" row="8" class="upload-descript-content" name="marked_description"></textarea>
                             </div>
                         </div>
                     </div>
                 <div class="row-fluid">
-                    <div class="span4">
-                        <p style="font-size:10px;">按住Ctrl键可多选照片<br/>每次最多上传100张照片</p>
+                    <div class="span3 offset4">
+                        <p style="font-size:10px;">按住Ctrl键可多选照片<br/>每次最多上传5张照片</p>
                     </div>
                     <a href="#" class="btn btn-large" onclick='imgUploadAtFriend();'>选择照片</a>
-                    <a href="#" class="btn btn-large btn-primary" onclick='javascript:finish_upload_photo();'>完成上传</a>
+                    <a href="#" class="btn btn-large btn-primary" onclick='javascript:finish_mark_and_upload();'>完成上传</a>
 
                 </form>
                 <form action="../photo/add_photo_to_at_friends_action.php" method="post" enctype="multipart/form-data" id="selectImgAtFriend_form" >
@@ -881,21 +910,18 @@ if ($_smarty_tpl->_count($_from) > 0){
     <!-- Modal Photo Upload to Album-->
     <div id="uploadModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="give_up()">×</button>
             <h4><i class="icon-camera icon-white"></i> 上传照片 存至相册</h4>
         </div>
-        <form action="../photo/store_info_to_DB.php" method="post" id="upload_final" >
+        <form action="../photo/store_photo_to_DB_album.php" method="post" id="upload_final" >
         <div class="modal-body photo-upload-container" id="modal_body">
-
+<!-- 这里存放动态上传的照片 -->
         </div>
         <div class="modal-footer row-fluid photo-upload-footer">
             <div class="span5">
                 <div class="row-fluid" style="padding-top: 7px;">
                     <a href="#newAlbumModal" data-toggle="modal"><h4 class="text-error span5" style="line-height:10px;">+ 新建相册</h4></a>
                     <select class="span7" name="album_id" id="album_id">
-                        <!-- <option selected="selected" disabled>选择相册</option>
-                        <option>1</option>
-                        <option>2</option> -->
                         <?php echo $_smarty_tpl->getVariable('album_html')->value;?>
 
                     </select>
@@ -908,11 +934,11 @@ if ($_smarty_tpl->_count($_from) > 0){
                 <a href="#" class="btn btn-large" onclick='imgUploadToAlbum();'>选择照片</a>
                 <a href="#" class="btn btn-large btn-primary" onclick='javascript:finish_upload_photo();'>完成上传</a>
         </form>
-        <form action="../photo/add_photo_action.php" method="post" enctype="multipart/form-data" id="upload_photo_form" >
+        <form action="../photo/add_photo_to_album.php" method="post" enctype="multipart/form-data" id="upload_photo_form" >
         <!-- <form action="../photo/multi_file_upload_action.php" method="post" enctype="multipart/form-data" id="upload_photo_form" > -->
             <!--   <a href="#" class="btn btn-large">选择照片</a> -->
             <input type="hidden" id="MAX_FILE_SIZE" name="MAX_FILE_SIZE" value="10000000" />
-            <input type="file" id="selectImgToAlbum" name="selectImgToAlbum" style="display: none;"/>
+            <input type="file" id="selectImgToAlbum" name="selectImgToAlbum[]" multiple="multiple" style="display: none;"/>
         </form>
             </div>
         </div>
@@ -999,7 +1025,7 @@ if ($_smarty_tpl->_count($_from) > 0){
                             </div>
                         </div>
                         <div class="control-group no-space">
-                            <label class="control-label span6" for="postToAll">贴给所有粉丝</label>
+                            <label class="control-label span6" for="postToFans">贴给所有粉丝</label>
                             <div class="controls span6">
                                 <select id="postToFans" class="input-small">
                                     <option value="yes">是</option>
@@ -1008,10 +1034,10 @@ if ($_smarty_tpl->_count($_from) > 0){
                             </div>
                         </div>
                     </div>
-                    <div class="span7">
+                    <div class="span6 offset2">
                         <div class="single-photo-descript-box">
                             <span class="descript-arrow"></span>
-                            <textarea placeholder="添加描述" col="50" row="8" class="upload-descript-content" id="mark_description"></textarea>
+                            <textarea placeholder="添加描述" col="25" row="8" class="upload-descript-content" id="mark_description"></textarea>
                         </div>
                     </div>
                 </div>
@@ -1028,7 +1054,7 @@ if ($_smarty_tpl->_count($_from) > 0){
   <!--   <script type="text/javascript" src="../../View/resources/js/directly_at_friends/filedrag.js"></script> -->
     <script type="text/javascript" src="../../View/resources/js/bootstrap-tab.js"></script>
     <script type="text/javascript" src="../../View/resources/js/comment/comment.js"></script>
-    <script type="text/javascript" src="../../View/resources/js/directly_at_friends/at_friends.js"></script>
+   
     <script type='text/javascript' src="http://twitter.github.com/bootstrap/assets/js/bootstrap-typeahead.js"></script>
     <script type='text/javascript' src="../../View/resources/js/mention.js"></script>
     <script type='text/javascript' src="../../View/resources/js/jquery.tinylimiter.js"></script>

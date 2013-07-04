@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="../../View/resources/js/validation.js"></script>
-    <script src="../../View/resources/js/jquery.js"></script>
-    <script type="text/javascript" src="../../Controller/resources/JQuery_Plugins/ajax_form/jquery.form.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="../../View/resources/js/validation.js"></script>
+	<script src="../../View/resources/js/jquery.js"></script>
+	<script type="text/javascript" src="../../Controller/resources/JQuery_Plugins/ajax_form/jquery.form.js"></script>
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap-responsive.css">
     <script type="text/javascript" src="../../View/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../View/resources/js/bootstrap-tab.js"></script>
-    <script>
-
-    </script>
+	<script>
+	
+	</script>
     <script><!--show hide buttons-->
     $(document).ready(function(show_hide) {
         $('.user_info').mouseenter(function() {$('.list_action',this).removeClass("hideV").addClass("showV")});
@@ -43,9 +43,9 @@
     </style>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Photowall-搜索结果</title>
-    <link rel="stylesheet" type="text/css" href="../../View/resources/css/follow.css">
-    <script type="text/javascript" src="../../View/resources/js/search.js"></script>
+<title>Photowall-搜索结果</title>
+<link rel="stylesheet" type="text/css" href="../../View/resources/css/follow.css">
+<script type="text/javascript" src="../../View/resources/js/search.js"></script>
 </head>
 <body>
 <div class="wrapper">
@@ -87,14 +87,14 @@
                     </ul>
                 </li>
                 <li style="width:250px; height:34px;">
-                    <form action="search_result.php" method="post">
-                        <div id="search-area">
-                            <input name="keyword" type="text" size="30" class="search" id="keyword" placeholder="搜索-贴友/粉丝/关注" />
-                            <div id="divResult">
-                            </div>
-                            <button type="submit" class="btn btn-nav right" value="submit"><i class="icon-search"></i></button>
+                	<form action="search_result.php" method="post">
+                    <div id="search-area">
+                        <input name="keyword" type="text" size="30" class="search" id="keyword" placeholder="搜索-贴友/粉丝/关注" />
+                        <div id="divResult">
                         </div>
-                    </form>
+                        <button type="submit" class="btn btn-nav right" value="submit"><i class="icon-search"></i></button>
+                    </div>
+                   </form>
                 </li>
                 <li class="current">
                     <a href="http://www.photowall.cc" style="width:15px; margin-left:30px;"><i class="icon-camera icon-white"></i></a>
@@ -104,15 +104,73 @@
         <!--nav bar ends-->
     </div>
     <div class="main_content">
-        <div class="list">
+    <div class="list">
+    	<br/>
+    	<ul>
+            <!-- <li class="search_result_single row-fluid">
+            <hr class="hr"/>
             <br/>
-            <ul>
-                <!-- <li class="search_result_single row-fluid">
+            <div class="line_holder"></div>
+            <div class="span3 no-space">
+                <div class="img-display img-polaroid" onclick=''>
+                    <a href="" class="no-link img-large" style="background-image: url(../../View/resources/img/photos/car.jpg);"></a>
+                </div>
+                <p class="img-large"><i class="icon-map-marker"></i><a class="location" href="#">青岛，中国</a></p>
+                <p></p>
+            </div>
+            <div class="span2 no-space">
+                <h4 ><span style="font-size:16px; color: black;">阿Y</span><span class="vip">&nbsp;VIP</span></h4>
+                <p></p>
+                <h6><i class="icon-star"></i>&nbsp;关注&nbsp;&nbsp;188</h6>
+                <h6><i class="icon-heart"></i>&nbsp;粉丝&nbsp;&nbsp;541</h6>
+                <h6><i class="icon-user"></i>&nbsp;贴友&nbsp;&nbsp;88</h6>
+                <button type="button" class="btn btn-small"><span class="text-error"><strong>&nbsp;&nbsp;+加关注&nbsp;</strong></span></button>
+            </div>
+            <div class="span4 offset1 text-left">
+                <h5>兴趣标签：</h5>
+                <p></p>
+                <h6>篮球&nbsp;&nbsp;足球&nbsp;&nbsp;网球&nbsp;&nbsp;电影</h6><br/>
+                <h5>个人简介：</h5>
+                <p></p>
+                <h6>巴塞罗那万岁！！</h6>
+            </div>
+        </li> -->
+        {#section name=index loop=$Final_ResultSet#}
+          <li class="search_result_single row-fluid">
                 <hr class="hr"/>
                 <br/>
                 <div class="line_holder"></div>
                 <div class="span3 no-space">
-                    <div class="img-display img-polaroid" onclick=''>
+                    <div class="img-display-large img-polaroid" onclick=''>
+                        <a href="" class="no-link img-large" style="background-image: url({#$Final_ResultSet[index].photo_path#});"></a>
+                    </div>
+                    <p class="img-large"><i class="icon-map-marker"></i><a class="location" href="#">{#$Final_ResultSet[index].location#}</a></p>
+                    <p></p>
+                </div>
+                <div class="span2 no-space">
+                    <h4 ><span style="font-size:16px; color: black;">{#$Final_ResultSet[index].nick_name#}</span><span class="vip">&nbsp;VIP</span></h4>
+                    <p></p>
+                    <h6><i class="icon-star"></i>&nbsp;关注&nbsp;&nbsp;{#$Final_ResultSet[index].concerns_count#}</h6>
+                    <h6><i class="icon-heart"></i>&nbsp;粉丝&nbsp;&nbsp;{#$Final_ResultSet[index].fans_count#}</h6>
+                    <h6><i class="icon-user"></i>&nbsp;贴友&nbsp;&nbsp;{#$Final_ResultSet[index].friends_count#}</h6>
+                    <button type="button" class="btn btn-small"><span class="text-error"><strong>&nbsp;&nbsp;+加关注&nbsp;</strong></span></button>
+                </div>
+                <div class="span4 offset1 text-left">
+                    <h5>兴趣标签：</h5>
+                    <p></p>
+                    <h6>篮球&nbsp;&nbsp;足球&nbsp;&nbsp;网球&nbsp;&nbsp;电影</h6><br/>
+                    <h5>个人简介：</h5>
+                    <p></p>
+                    <h6>{#$Final_ResultSet[index].introduction#}</h6>
+                </div>
+            </li>
+        {#/section#}
+            <!-- <li class="search_result_single row-fluid">
+                <hr class="hr"/>
+                <br/>
+                <div class="line_holder"></div>
+                <div class="span3 no-space">
+                    <div class="img-display-large img-polaroid" onclick=''>
                         <a href="" class="no-link img-large" style="background-image: url(../../View/resources/img/photos/car.jpg);"></a>
                     </div>
                     <p class="img-large"><i class="icon-map-marker"></i><a class="location" href="#">青岛，中国</a></p>
@@ -135,70 +193,12 @@
                     <h6>巴塞罗那万岁！！</h6>
                 </div>
             </li> -->
-                {#section name=index loop=$Final_ResultSet#}
-                <li class="search_result_single row-fluid">
-                    <hr class="hr"/>
-                    <br/>
-                    <div class="line_holder"></div>
-                    <div class="span3 no-space">
-                        <div class="img-display-large img-polaroid" onclick=''>
-                            <a href="" class="no-link img-large" style="background-image: url({#$Final_ResultSet[index].photo_path#});"></a>
-                        </div>
-                        <p class="img-large"><i class="icon-map-marker"></i><a class="location" href="#">{#$Final_ResultSet[index].location#}</a></p>
-                        <p></p>
-                    </div>
-                    <div class="span2 no-space">
-                        <h4 ><span style="font-size:16px; color: black;">{#$Final_ResultSet[index].nick_name#}</span><span class="vip">&nbsp;VIP</span></h4>
-                        <p></p>
-                        <h6><i class="icon-star"></i>&nbsp;关注&nbsp;&nbsp;{#$Final_ResultSet[index].concerns_count#}</h6>
-                        <h6><i class="icon-heart"></i>&nbsp;粉丝&nbsp;&nbsp;{#$Final_ResultSet[index].fans_count#}</h6>
-                        <h6><i class="icon-user"></i>&nbsp;贴友&nbsp;&nbsp;{#$Final_ResultSet[index].friends_count#}</h6>
-                        <button type="button" class="btn btn-small"><span class="text-error"><strong>&nbsp;&nbsp;+加关注&nbsp;</strong></span></button>
-                    </div>
-                    <div class="span4 offset1 text-left">
-                        <h5>兴趣标签：</h5>
-                        <p></p>
-                        <h6>篮球&nbsp;&nbsp;足球&nbsp;&nbsp;网球&nbsp;&nbsp;电影</h6><br/>
-                        <h5>个人简介：</h5>
-                        <p></p>
-                        <h6>{#$Final_ResultSet[index].introduction#}</h6>
-                    </div>
-                </li>
-                {#/section#}
-                <!-- <li class="search_result_single row-fluid">
-                    <hr class="hr"/>
-                    <br/>
-                    <div class="line_holder"></div>
-                    <div class="span3 no-space">
-                        <div class="img-display-large img-polaroid" onclick=''>
-                            <a href="" class="no-link img-large" style="background-image: url(../../View/resources/img/photos/car.jpg);"></a>
-                        </div>
-                        <p class="img-large"><i class="icon-map-marker"></i><a class="location" href="#">青岛，中国</a></p>
-                        <p></p>
-                    </div>
-                    <div class="span2 no-space">
-                        <h4 ><span style="font-size:16px; color: black;">阿Y</span><span class="vip">&nbsp;VIP</span></h4>
-                        <p></p>
-                        <h6><i class="icon-star"></i>&nbsp;关注&nbsp;&nbsp;188</h6>
-                        <h6><i class="icon-heart"></i>&nbsp;粉丝&nbsp;&nbsp;541</h6>
-                        <h6><i class="icon-user"></i>&nbsp;贴友&nbsp;&nbsp;88</h6>
-                        <button type="button" class="btn btn-small"><span class="text-error"><strong>&nbsp;&nbsp;+加关注&nbsp;</strong></span></button>
-                    </div>
-                    <div class="span4 offset1 text-left">
-                        <h5>兴趣标签：</h5>
-                        <p></p>
-                        <h6>篮球&nbsp;&nbsp;足球&nbsp;&nbsp;网球&nbsp;&nbsp;电影</h6><br/>
-                        <h5>个人简介：</h5>
-                        <p></p>
-                        <h6>巴塞罗那万岁！！</h6>
-                    </div>
-                </li> -->
-            </ul>
-        </div>
-    </div><!--main_content ends-->
+       </ul>
+    </div>
+	</div><!--main_content ends-->
     <div class="footer">
-        <div class="copyright">
-            <p>Copyright© 2012-2022 Photowall Inc, All Rights Reserved.</p>
+    	<div class="copyright">
+        	<p>Copyright© 2012-2022 Photowall Inc, All Rights Reserved.</p>
             <p>照片墙 版权所有</p>
             <a href="http://www.tangerteq.com"><p>Powered by Tanger TEQ LLC.</p></a>
         </div>

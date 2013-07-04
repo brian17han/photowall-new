@@ -2,12 +2,12 @@ $(function(){
     $(".search").keyup(function()
     {
         var inputSearch = $(this).val();
-        var dataString = 'searchword='+ inputSearch;
+        var dataString = 'keyword='+ inputSearch;
         if(inputSearch!='')
         {
             $.ajax({
                 type: "POST",
-                url: "search.php",
+                url: "search_friends.php",
                 data: dataString,
                 cache: false,
                 success: function(html)

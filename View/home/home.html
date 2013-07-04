@@ -212,12 +212,14 @@
                 </ul>
             </li>
             <li style="width:250px; height:34px;">
+            	<form action="search_result.php" method="post">
                 <div id="search-area">
-                    <input name="q" type="text" size="30" class="search" id="inputSearch" placeholder="搜索-贴友/粉丝/关注" />
+                    <input name="keyword" type="text" size="30" class="search" id="inputSearch" placeholder="搜索-贴友/粉丝/关注" />
                     <div id="divResult">
                     </div>
                     <button type="submit" class="btn btn-nav right" value="submit"><i class="icon-search"></i></button>
                 </div>
+                </form>
             </li>
             <li class="current">
                 <a href="#photoUploadOption" data-toggle="modal" style="width:15px; margin-left:30px;"><i class="icon-camera icon-white"></i></a>
@@ -276,12 +278,15 @@
                                 	<div class="row-fluid photo-info">
                                         <div class="span4">
                                             <a href="#myModal" class="no-link offset1" data-toggle="modal">
-                                                <img onclick="see_single_photo(this);" src="{#$result_friend_movement[index].photo_path#}" class="img-polaroid img-large"/>
+                         
+                                                <img onclick="see_single_photo(this,'{#$result_friend_movement[index].all_photo_names#}');" id="{#$result_friend_movement[index].all_photo_id#}"
+                                                 src="{#$result_friend_movement[index].photo_path#}"
+                                                  class="img-polaroid img-large"/>
                                             </a>
                                         </div>
                                         <div class="span7">
                                             <h5>{#$result_friend_movement[index].marker_nick_name#}</h5>
-                                            <p>于{#$result_friend_movement[index].date#}上传<span class="text-error">1</span>张新照片！</p>
+                                            <p>于{#$result_friend_movement[index].date#}上传<span class="text-error">{#$result_friend_movement[index].photo_uploaded_amount#}</span>张新照片！</p>
                                             <p>通过网页版客户端</p>
                                             <i class="icon-map-marker"></i><a class="location" href="#">五四广场</a>
                                             <hr/>
@@ -322,7 +327,10 @@
                                 	<div class="row-fluid photo-info">
                                         <div class="span4">
                                             <a href="#myModal" class="no-link offset1" data-toggle="modal">
-                                                <img onclick="see_single_photo(this);" src="{#$result_photowall_movement[index].one_of_photo_path#}" class="img-polaroid img-large"/>
+                                
+                                                <img onclick="see_single_photo(this,'{#$result_photowall_movement[index].all_photo_names#}');" id="{#$result_photowall_movement[index].all_photo_id#}" 
+                                                src="{#$result_photowall_movement[index].one_of_photo_path#}" 
+                                                class="img-polaroid img-large"/>
                                             </a>
                                         </div>
                                         <div class="span7">
@@ -628,8 +636,9 @@
             <div class="row-fluid">
                 <div class="span12 img-box">
                     <img id="photo_for_comment_display" class="img-polaroid img-orig" width="600" src="../../View/resources/img/photos/snow-covered-trees.jpg" />
-                    <p class="carousel-control left" id="myModalLeftArrow" onclick="" data-slide="prev">‹</p>
-                    <p class="carousel-control right" id="myModalRightArrow" onclick="" data-slide="next">›</p>
+                    <p class="carousel-control left" onclick="see_prev_photo()" data-slide="prev">‹</p>
+                    <p class="carousel-control right" onclick="see_next_photo()" data-slide="next">›</p>
+
                     <p></p>
                     <p class="no-space">郊外美丽的雪景，一片银白</p>
                     <hr />

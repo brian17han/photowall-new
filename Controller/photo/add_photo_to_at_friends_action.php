@@ -1,26 +1,11 @@
 <?php @session_start();
-//$fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
-// if ($fn) {
-	// // AJAX call
-	// file_put_contents(
-		// '../Project_Images/temp_uploaded_photos/' . $_SESSION["user_id"]."_".$fn,
-		// file_get_contents('php://input')
-	// );
-	// echo "$fn uploaded";
-	// exit();
-// 
-// }
-// else {
-
-	// form submit
 $reponse_html="";
 $temp_store_path="../Project_Images/temp_uploaded_photos/";
-	$files = $_FILES['selectImgAtFriend'];
+$photo_submit_path="../Project_Images/photos/";
+$files = $_FILES['selectImgAtFriend'];
 
 	foreach ($files['name'] as $id => $err) {
-	//	if ($err == UPLOAD_ERR_OK) {
-		//	$fn = iconv("UTF-8","gb2312",$files['name'][$id]);
-		    $fn = $temp_store_path.$_SESSION["user_id"]."_".$files['name'][$id];
+		    $fn = $temp_store_path.$_SESSION["user_id"]."_".str_replace(" ","", substr(microtime(), 2))."_".$files['name'][$id];
 			if(file_exists($fn))
 			    $fn=$temp_store_path.$_SESSION["user_id"]."_".str_replace(" ","", substr(microtime(), 2))."_".$files['name'][$id];
 			$fn=iconv("UTF-8", "gb2312", $fn);
@@ -28,21 +13,25 @@ $temp_store_path="../Project_Images/temp_uploaded_photos/";
 			{
 				$fn=iconv("gb2312","UTF-8",$fn);
 				$path=$fn;
+				$photo_name=substr($path, strripos($path, "/")+1);
+				$photo_submit_path.=$photo_name;
                 $temp=<<<EOF
                 <div class="upload-img">
+                <a href="#newSinglePhotoModal" data-toggle="modal">
                     <img src="$path" class="img-polaroid img-large"/>
+                </a> 
                     <div class="upload-descript-box">
                         <span class="descript-arrow"></span>
-                        <i class="icon-remove upload-remove-img" onclick="removeImg(this)" title="删除"></i></a>
-                        <textarea placeholder="添加描述" maxlength="240" class="upload-descript-content"></textarea>
+                        <i id='$photo_name' class="icon-remove upload-remove-img" onclick="removeImg_atFriends(this)" title="删除"></i></a>
+                        <textarea placeholder="添加描述" maxlength="240" name="photo_description[]" id="photo_description[]" class="upload-descript-content"></textarea>
+                        <input type="hidden" name="photo_name[]" id="photo_name[]" value='$photo_name' />
+                        <input type="hidden" name="photo_path[]" id="photo_path[]" value='$photo_submit_path' />
                     </div>
                 </div>
 EOF;
                 $reponse_html.=$temp;
+				$photo_submit_path="../Project_Images/photos/";
 			}
-	//	}
 	}
     echo $reponse_html;
-
-//}
 ?>

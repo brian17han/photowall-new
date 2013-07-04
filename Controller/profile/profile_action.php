@@ -2,6 +2,7 @@
 require_once('../../connector.ini.php');
 require_once('../../Controller/Validation/validate_string.php');
 require_once('../../Controller/Image_Handle/Generate_Thumbnail.php');
+require_once('PinYin.php');
 if(isset($_POST["submit_test"])&&$_POST["submit_test"]=="submit_test")
 {
     $url_pattern="/http:\/\/.*/";
@@ -37,11 +38,13 @@ if(isset($_POST["submit_test"])&&$_POST["submit_test"]=="submit_test")
 	               '".$recommended_by."','".$nick_name."','".$province."','".$city."','".$sex."','".$birthday."','".$blood_type."','".$profile."',
 	               '".$QQ."','".$MSN."','".$introduction."','".$head_photo["name"]."')";  */
     //开始修改用户的profile
+    //把nick_name转成拼音
+    $chinese_pinyin=Pinyin($nick_name);
     $sql_update="update user set real_name='".$real_name."', password='".md5($password)."', email='".$email."', recommended_by='".$recommended_by."',
                  nick_name='".$nick_name."', province='".$province."', city='".$city."', sex='".$sex."', birthday='".$birthday."',
                  blood_type='".$blood_type."', profile='".$profile."', QQ='".$QQ."', MSN='".$MSN."', introduction='".$introduction."',
                  head_photo='".$head_photo['name']."', head_photo_big_thumbnail='".$head_photo['name']."',
-                 head_photo_small_thumbnail='".$head_photo['name']."' where user_id='".$_SESSION['user_id']."'";
+                 head_photo_small_thumbnail='".$head_photo['name']."', chinese_pinyin='".$chinese_pinyin."' where user_id='".$_SESSION['user_id']."'";
    // die($sql_update);
 	$query=mysql_query($sql_update);
 	//die($sql_update);

@@ -1,55 +1,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="../../View/resources/js/validation.js"></script>
-    <script src="../../View/resources/js/jquery.js"></script>
-    <script type="text/javascript" src="../../Controller/resources/JQuery_Plugins/ajax_form/jquery.form.js"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	<script src="../../View/resources/js/validation.js"></script>
+	<script src="../../View/resources/js/jquery.js"></script>
+	<script type="text/javascript" src="../../Controller/resources/JQuery_Plugins/ajax_form/jquery.form.js"></script>
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../View/resources/css/bootstrap-responsive.css">
     <script type="text/javascript" src="../../View/resources/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../../View/resources/js/bootstrap-tab.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(":text").each(function(){
-                $(this).val("");
-            });
-            $(":password").val("");
-        });
-        function open_album(photo_id,photo_path){
-            var photo_for_comment_display_obj=document.getElementById("photo_for_comment_display");
-            photo_for_comment_display_obj.src=photo_path;
+	<script>
+		$(document).ready(function(){
+			$(":text").each(function(){
+				$(this).val("");
+			});
+			$(":password").val("");
+		});
+		function open_album(photo_id,photo_path){
+	    	 var photo_for_comment_display_obj=document.getElementById("photo_for_comment_display");
+             photo_for_comment_display_obj.src=photo_path;
             //because the photo_name is unique, so we just get the photo_name to acquire the photo_id
-            var photo_name_first_slash_index=photo_path.lastIndexOf("/");
-            var photo_name=photo_path.substring(photo_name_first_slash_index+1);
-            var photo_name_for_comment_obj=document.getElementById("photo_name_for_comment");
-            photo_name_for_comment_obj.value=photo_name;
-            //start to load all comments for this photo
-            $.ajax({
+             var photo_name_first_slash_index=photo_path.lastIndexOf("/");
+             var photo_name=photo_path.substring(photo_name_first_slash_index+1);
+             var photo_name_for_comment_obj=document.getElementById("photo_name_for_comment");
+             photo_name_for_comment_obj.value=photo_name;
+             //start to load all comments for this photo
+             $.ajax({
                 type: "POST",
                 url: "../comment/load_all_comment.php",
                 data: { photo_name:photo_name }
-            }).done(function( msg ) {
-                        $("#comment-box").html(msg);
-                    });
-        }
-        var comment_html="";
-        function comment_success(responseText, statusText)
-        {
-            comment_html+=responseText;
-            $("#comment-box").append(responseText);
-        }
-        function send_comment()
-        {
-            var photo_name=document.getElementById("photo_name_for_comment").value;
-            $("#photo_comment_form").ajaxForm({
-                data:{photo_name:photo_name},
-                // target: '#comment-box',
-                success:comment_success
-            }).submit();
-        }
-    </script>
+             }).done(function( msg ) {
+                 $("#comment-box").html(msg);
+             }); 
+	    }
+	    var comment_html="";
+function comment_success(responseText, statusText)
+{
+    comment_html+=responseText;
+     $("#comment-box").append(responseText);
+}
+function send_comment()
+{
+    var photo_name=document.getElementById("photo_name_for_comment").value;
+    $("#photo_comment_form").ajaxForm({
+        data:{photo_name:photo_name},
+       // target: '#comment-box',
+        success:comment_success
+    }).submit();
+}
+	</script>
     <script><!--show hide buttons-->
     $(document).ready(function(show_hide) {
         $('.user_info').mouseenter(function() {$('.list_action',this).removeClass("hideV").addClass("showV")});
@@ -58,8 +58,8 @@
     </script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Photowall-我的展示墙</title>
-    <link rel="stylesheet" type="text/css" href="../../View/resources/css/follow.css">
+<title>Photowall-我的展示墙</title>
+<link rel="stylesheet" type="text/css" href="../../View/resources/css/follow.css">
 </head>
 <body>
 <div class="wrapper">
@@ -114,53 +114,53 @@
         <!--nav bar ends-->
     </div>
     <div class="main_content">
-        <div class="list">
-            <div class="album-path"><h3>我的相册 <i class="icon-arrow-right"></i>{#$album_name#}</h3></div>
-            <button type="button" class="btn"><i class="icon-upload"></i> <span class="text-error">上传照片</span></button>
-            <button type="button" class="btn"><i class="icon-plus"></i> <span class="text-error">新建相册</span></button>
-            <br/>
-            <hr class="hr"/>
-            <ul>
-                <li class="user_info">
-                    <div class="img-large">
-                        <a href="#myModal" class="no-link" data-toggle="modal">
-                            <img onclick="see_single_photo(this);" src="../../View/resources/img/photos/car.jpg" class="img-polaroid img-large"/>
-                        </a>
+    <div class="list">
+    	<div class="album-path"><h3>我的相册 <i class="icon-arrow-right"></i>{#$album_name#}</h3></div>
+        <button type="button" class="btn"><i class="icon-upload"></i> <span class="text-error">上传照片</span></button>
+        <button type="button" class="btn"><i class="icon-plus"></i> <span class="text-error">新建相册</span></button>
+        <br/>
+        <hr class="hr"/>
+    	<ul>
+            <li class="user_info">
+                <div class="img-large">
+                    <a href="#myModal" class="no-link" data-toggle="modal">
+                        <img onclick="see_single_photo(this);" src="../../View/resources/img/photos/car.jpg" class="img-polaroid img-large"/>
+                    </a>
+                </div>
+                <p onclick="window.location='http://google.com' ">照片名</p>
+                <div class="list_action hideV">
+                    <div class="list_action_button" onclick=" ">
+                        <p>重命名</p>
                     </div>
-                    <p onclick="window.location='http://google.com' ">照片名</p>
-                    <div class="list_action hideV">
-                        <div class="list_action_button" onclick=" ">
-                            <p>重命名</p>
-                        </div>
-                        <div class="list_action_button" onclick="" >
-                            <p>删除</p>
-                        </div>
+                    <div class="list_action_button" onclick="" >
+                        <p>删除</p>
                     </div>
-                </li>
-                {#section name=photo loop=$photo_2d_array#}
-                <li class="user_info">
-                    <div class="img-display-large img-polaroid" onclick='open_album("{#$photo_2d_array[photo].photo_id#}","{#$photo_2d_array[photo].photo_path#}")'>
-                        <a href="#myModal" class="no-link img-large" data-toggle="modal" style="background-image: url({#$photo_2d_array[photo].photo_path#});">
-                            <!--  <img  src="{#$photo_2d_array[photo].photo_path#}" class="img-polaroid img-large"/> -->
-                        </a>
+                </div>
+            </li>
+            {#section name=photo loop=$photo_2d_array#}
+            <li class="user_info">
+               <div class="img-display-large img-polaroid" onclick='open_album("{#$photo_2d_array[photo].photo_id#}","{#$photo_2d_array[photo].photo_path#}")'>
+                    <a href="#myModal" class="no-link img-large" data-toggle="modal" style="background-image: url({#$photo_2d_array[photo].photo_path#});">
+                       <!--  <img  src="{#$photo_2d_array[photo].photo_path#}" class="img-polaroid img-large"/> -->
+                    </a>
+                </div>
+                <p onclick="window.location='http://google.com' ">照片名</p>
+                <div class="list_action hideV">
+                    <div class="list_action_button" onclick="">
+                        <p>重命名</p>
                     </div>
-                    <p onclick="window.location='http://google.com' ">照片名</p>
-                    <div class="list_action hideV">
-                        <div class="list_action_button" onclick="">
-                            <p>重命名</p>
-                        </div>
-                        <div class="list_action_button" onclick="" >
-                            <p>删除</p>
-                        </div>
+                    <div class="list_action_button" onclick="" >
+                        <p>删除</p>
                     </div>
-                </li>
-                {#/section#}
-            </ul>
-        </div>
-    </div><!--main_content ends-->
+                </div>
+              </li>
+             {#/section#}
+       </ul>
+    </div>
+	</div><!--main_content ends-->
     <div class="footer">
-        <div class="copyright">
-            <p>Copyright© 2012-2022 Photowall Inc, All Rights Reserved.</p>
+    	<div class="copyright">
+        	<p>Copyright© 2012-2022 Photowall Inc, All Rights Reserved.</p>
             <p>照片墙 版权所有</p>
             <a href="http://www.tangerteq.com"><p>Powered by Tanger TEQ LLC.</p></a>
         </div>
